@@ -45,6 +45,14 @@ app.get('/redoc', (req, res) => {
     const roleRoutes = require('./modules/Authentication/routes/role.routes'); // Fixed file name
     app.use('/api', roleRoutes);
 
+
+    const userGroupRoutes = require('./modules/Authentication/routes/userGroup.routes');
+    app.use('/api', userGroupRoutes);
+
+
+    const permissionRoutes = require('./modules/Authentication/routes/permission.routes');
+    app.use('/api', permissionRoutes);
+    
     const { studentRoutes } = require('./modules/student/studentModule'); // Make sure `studentModule` exports `studentRoutes`
     app.use('/api/students', studentRoutes);
 
