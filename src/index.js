@@ -4,7 +4,7 @@ require('reflect-metadata'); // Required by TypeORM for decorators
 const express = require('express');
 const { DataSource } = require('typeorm');
 const ormConfig = require('./config/ormconfig');
-
+const path = require('path');
 // Initialize the DataSource with ORM configuration
 const AppDataSource = new DataSource(ormConfig);
 
@@ -38,7 +38,7 @@ app.get('/swaggerConfig.json', (req, res) => {
 
 // Serve ReDoc at /redoc
 app.get('/redoc', (req, res) => {
-    res.sendFile(path.join(__dirname, 'redoc.html'));
+    res.sendFile(path.join(__dirname, '../redoc.html'));
 });
 
     // Import and use routes
@@ -52,7 +52,16 @@ app.get('/redoc', (req, res) => {
 
     const permissionRoutes = require('./modules/Authentication/routes/permission.routes');
     app.use('/api', permissionRoutes);
+
+    const userRoleRoutes = require('./modules/Authentication/routes//userRole.routes');
+    app.use('/api', userRoleRoutes);
     
+    const userUserGroupRoutes = require('./modules/Authentication/routes/userUserGroupRoutes');
+    app.use('/api', userUserGroupRoutes); 
+
+    const rolePermissionRoutes = require('./modules/Authentication/routes/rolePermission.routes'); // Add this line
+    app.use('/api', rolePermissionRoutes);
+
     const { studentRoutes } = require('./modules/student/studentModule'); // Make sure `studentModule` exports `studentRoutes`
     app.use('/api/students', studentRoutes);
 
