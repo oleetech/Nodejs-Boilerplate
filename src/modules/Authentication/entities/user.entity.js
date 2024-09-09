@@ -40,6 +40,18 @@ module.exports = new EntitySchema({
             type: 'boolean',
             default: false,
         },
+        isLocked: {
+            type: 'boolean',
+            default: false,
+        },
+        isMfaEnabled: {
+            type: 'boolean',
+            default: false,
+        },
+        mfaCode: {
+            type: 'varchar',
+            nullable: true,
+        },
         googleId: {
             type: 'varchar',
             unique: true,
@@ -64,6 +76,10 @@ module.exports = new EntitySchema({
         },
         resetToken: {
             type: 'varchar',
+            nullable: true,
+        },
+        passwordUpdatedAt: {
+            type: 'timestamp',
             nullable: true,
         },
         createdAt: {
@@ -91,6 +107,22 @@ module.exports = new EntitySchema({
             joinColumn: { name: 'usergroup_id' },
             nullable: true,
             onDelete: 'SET NULL',
+        },
+        devices: {
+            type: 'one-to-many',  // One user can have multiple devices
+            target: 'Device',
+            inverseSide: 'user',
+            cascade: true,  // Optional: Automatically save devices when a user is saved
+        },
+        sessions: {
+            type: 'one-to-many',
+            target: 'Session',
+            inverseSide: 'user',
+        },
+        activityLogs: {
+            type: 'one-to-many',
+            target: 'ActivityLog',
+            inverseSide: 'user',
         },
     },
 });

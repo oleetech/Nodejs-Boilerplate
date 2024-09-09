@@ -1,35 +1,33 @@
-// modules/student/entities/student.entity.js
-
 const { EntitySchema } = require('typeorm');
 
 module.exports = new EntitySchema({
-    name: 'Student',
-    tableName: 'students',
+    name: 'ActivityLog',
+    tableName: 'activity_logs',
     columns: {
         id: {
             type: 'int',
             primary: true,
             generated: true,
         },
-        name: {
+        activityType: {
             type: 'varchar',
             nullable: false,
         },
-        age: {
-            type: 'int',
-            nullable: false,
-        },
-        grade: {
+        ipAddress: {
             type: 'varchar',
-            nullable: false,
+            nullable: true,
         },
-        createdAt: {
+        timestamp: {
             type: 'timestamp',
             createDate: true,
         },
-        updatedAt: {
-            type: 'timestamp',
-            updateDate: true,
+    },
+    relations: {
+        user: {
+            type: 'many-to-one',
+            target: 'User',
+            joinColumn: { name: 'user_id' },
+            nullable: false,
         },
     },
 });

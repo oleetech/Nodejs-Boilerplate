@@ -1,4 +1,3 @@
-// src/utils/sendEmail.js
 const nodemailer = require('nodemailer');
 require('dotenv').config(); // Ensure environment variables are loaded
 
@@ -28,9 +27,9 @@ const sendEmail = async (options) => {
     // Email options
     const mailOptions = {
         from: process.env.EMAIL_USER, // Sender's email address
-        to: options.to,             // Recipient's email address
-        subject: options.subject,   // Email subject
-        text: options.text,         // Email body text
+        to: options.to,               // Recipient's email address
+        subject: options.subject,     // Email subject
+        text: options.text,           // Email body text
     };
 
     try {
@@ -39,6 +38,7 @@ const sendEmail = async (options) => {
         console.log('Email sent successfully!');
     } catch (error) {
         console.error('Error sending email:', error);
+        throw error;
     }
 };
 

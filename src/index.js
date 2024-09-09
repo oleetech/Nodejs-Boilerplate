@@ -59,11 +59,15 @@ app.get('/redoc', (req, res) => {
     const userUserGroupRoutes = require('./modules/Authentication/routes/userUserGroupRoutes');
     app.use('/api', userUserGroupRoutes); 
 
-    const rolePermissionRoutes = require('./modules/Authentication/routes/rolePermission.routes'); // Add this line
+    const rolePermissionRoutes = require('./modules/Authentication/routes/rolePermission.routes'); 
     app.use('/api', rolePermissionRoutes);
 
-    const { studentRoutes } = require('./modules/student/studentModule'); // Make sure `studentModule` exports `studentRoutes`
-    app.use('/api/students', studentRoutes);
+  
+    const sessionRoutes = require('./modules/Authentication/routes/session.routes'); 
+    app.use('/api', sessionRoutes);
+
+    const deviceRoutes = require('./modules/Authentication/routes/device.routes'); 
+    app.use('/api', deviceRoutes);
 
     // Define the port and start the server
     const PORT = process.env.PORT || 3000;
