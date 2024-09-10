@@ -69,8 +69,15 @@ app.get('/redoc', (req, res) => {
     const deviceRoutes = require('./modules/Authentication/routes/device.routes'); 
     app.use('/api', deviceRoutes);
 
+
+    const activityLogRoutes = require('./modules/Authentication/routes/activityLog.routes');
+    app.use('/api', activityLogRoutes);
+
+    const userRoutes = require('./modules/Authentication/routes/user.routes');
+    app.use('/api', userRoutes);
+
     // Define the port and start the server
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
